@@ -14,7 +14,7 @@ public class DinnerConstructor {
         categoryForCombo = new ArrayList<>();
     }
 
-    void addCategoryAndDish (String dishType, String dishName) {
+    void addCategoryAndDish(String dishType, String dishName) {
         if (categoriesAndLists.containsKey(dishType)) {
             ArrayList<String> dishes = categoriesAndLists.get(dishType);
             dishes.add(dishName);
@@ -25,19 +25,28 @@ public class DinnerConstructor {
         }
     }
 
+    void addTypeForCombo(String nextItem) {
+        if (checkType(nextItem)) {
+            categoryForCombo.add(nextItem);
+        } else {
+            System.out.println("Такого типа блюд нет, попробуйте еще раз");
+        }
+    }
+
     void comboGenerator(int numberOfCombos) {
         for (int i = 1; i <= numberOfCombos; i++) {
-            System.out.printf("Комбо №%d\n", i);
+            System.out.printf("Комбо №%d%n", i);
             ArrayList<String> combo = new ArrayList<>();
-            for (int j = 0; j < categoryForCombo.size(); j++) {
-                ArrayList<String> currentCategory = categoriesAndLists.get(categoryForCombo.get(j));
+            for (String current : categoryForCombo) {
+                ArrayList<String> currentCategory = categoriesAndLists.get(current);
                 combo.add(currentCategory.get(randomGenerator.nextInt(currentCategory.size())));
             }
             System.out.println(combo);
         }
+        categoryForCombo.clear();
     }
 
-    boolean checkType (String type) {
+    boolean checkType(String type) {
         return categoriesAndLists.containsKey(type);
     }
 }

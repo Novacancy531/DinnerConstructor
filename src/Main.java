@@ -22,6 +22,7 @@ public class Main {
                     break;
                 case "3":
                     return;
+                default:
             }
         }
     }
@@ -39,29 +40,24 @@ public class Main {
         System.out.println("Введите название блюда:");
         String dishName = scanner.nextLine();
 
-        dinnerConstructor.addCategoryAndDish(dishType, dishName);// добавьте новое блюдо
+        dinnerConstructor.addCategoryAndDish(dishType, dishName);
     }
 
     private static void generateDishCombo() {
         System.out.println("Начинаем конструировать обед...");
-
         System.out.println("Введите количество наборов, которые нужно сгенерировать:");
+
         int numberOfCombos = scanner.nextInt();
         scanner.nextLine();
 
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
         String nextItem = scanner.nextLine();
 
-        //реализуйте ввод типов блюд
         while (!nextItem.isEmpty()) {
-            if (dinnerConstructor.checkType(nextItem)) {
-                dinnerConstructor.categoryForCombo.add(nextItem);
-            } else {
-                System.out.println("Такого типа блюд нет, попробуйте еще раз");
-            }
+            dinnerConstructor.addTypeForCombo(nextItem);
             nextItem = scanner.nextLine();
         }
 
-        dinnerConstructor.comboGenerator(numberOfCombos);// сгенерируйте комбинации блюд и выведите на экран
+        dinnerConstructor.comboGenerator(numberOfCombos);
     }
 }
