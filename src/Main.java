@@ -2,11 +2,11 @@ import java.util.Scanner;
 
 public class Main {
 
-    static DinnerConstructor dc;
+    static DinnerConstructor dinnerConstructor;
     static Scanner scanner;
 
     public static void main(String[] args) {
-        dc = new DinnerConstructor();
+        dinnerConstructor = new DinnerConstructor();
         scanner = new Scanner(System.in);
 
         while (true) {
@@ -39,7 +39,7 @@ public class Main {
         System.out.println("Введите название блюда:");
         String dishName = scanner.nextLine();
 
-        // добавьте новое блюдо
+        dinnerConstructor.addCategoryAndDish(dishType, dishName);// добавьте новое блюдо
     }
 
     private static void generateDishCombo() {
@@ -54,10 +54,14 @@ public class Main {
 
         //реализуйте ввод типов блюд
         while (!nextItem.isEmpty()) {
-
+            if (dinnerConstructor.checkType(nextItem)) {
+                dinnerConstructor.categoryForCombo.add(nextItem);
+            } else {
+                System.out.println("Такого типа блюд нет, попробуйте еще раз");
+            }
+            nextItem = scanner.nextLine();
         }
 
-        // сгенерируйте комбинации блюд и выведите на экран
-
+        dinnerConstructor.comboGenerator(numberOfCombos);// сгенерируйте комбинации блюд и выведите на экран
     }
 }
